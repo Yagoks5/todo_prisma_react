@@ -49,3 +49,13 @@
   font-weight: 700;
   font-size: 30px;
 }
+
+.error {
+  color: red;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  background-color: #ffe6e6; /* Fundo leve para destacar a mensagem */
+  padding: 10px; /* Um pouco de espaçamento */
+  border: 1px solid red; /* Borda vermelha */
+  border-radius: 5px; /* Bordas arredondadas */
+}

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import styles from "./Header.module.css";
 
-export default function Header({ onAddTask, newTask, setNewTask }) {
+export default function Header({ onAddTask, newTask, setNewTask, error }) {
   function handleSubmit(event) {
     event.preventDefault();
     onAddTask(newTask); // Passa o título para a função addTask
@@ -15,7 +15,7 @@ export default function Header({ onAddTask, newTask, setNewTask }) {
   return (
     <header className={styles.header}>
       <form onSubmit={handleSubmit} className={styles.newTaskForm}>
-        <button>+</button>
+        <button type="submit">+</button>
         <input
           placeholder="Adicione uma nova tarefa"
           type="text"
@@ -23,6 +23,8 @@ export default function Header({ onAddTask, newTask, setNewTask }) {
           onChange={onChangeTitle}
         />
       </form>
+      {error && <p className={styles.error}>{error}</p>}{" "}
+      {/* Exibe a mensagem de erro */}
     </header>
   );
 }

@@ -8,6 +8,7 @@ import axios from "axios";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
+  const [error, setError] = useState(""); // Estado para a mensagem de erro
 
   // Mostrar todas as tarefas
   const showAllTasks = () => {
@@ -30,9 +31,10 @@ function App() {
   const addTask = () => {
     console.log("Valor de newTask:", newTask); // Verifica o valor que está sendo enviado
     if (!newTask.trim()) {
-      console.log("Título da tarefa está vazio!");
-      return; // Impede o envio se o título estiver vazio
+      setError("Por favor, digite uma tarefa");
+      return; // Impedir o envio se o título estiver vazio
     }
+    setError(""); // apagar a mensagem carro correto
 
     axios
       .post("http://localhost:5000/tasks", { title: newTask })
@@ -45,7 +47,7 @@ function App() {
       });
   };
 
-  // Alterar o status da tarefa (concluida ou não concluida)
+  // Alterar o status da tarefa (concluida ou não concluida) Deletar
   const toggleTask = (id, completed) => {
     axios
       .put(`http://localhost:5000/tasks/${id}`, { completed: !completed })
@@ -76,6 +78,7 @@ function App() {
         onAddTask={addTask}
         newTask={newTask}
         setNewTask={setNewTask}
+        error={error}
       ></Header>
       <Tasks
         tasks={activeTasks}

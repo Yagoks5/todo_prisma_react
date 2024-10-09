@@ -5,15 +5,13 @@ import styles from "./Tasks.module.css";
 //miss props?
 export default function Tasks({ tasks, onComplete, onDelete, completedTasks }) {
   const tasksQuantity = tasks.length;
-  const finishedTasks = tasks.filter((task) => task.isCompleted);
 
   return (
     <>
       <section className={styles.tasks}>
         <header className={styles.header}>
           <div>
-            <p>Numero de tarefas</p>
-            <span>{tasksQuantity}</span>
+            <h3 className={styles.tituloTarefa}>Tarefas: {tasksQuantity}</h3>
           </div>
           <div>
             <p>Tarefas ativas</p>
@@ -24,6 +22,7 @@ export default function Tasks({ tasks, onComplete, onDelete, completedTasks }) {
                   task={task}
                   onComplete={onComplete}
                   onDelete={onDelete}
+                  showDeleteButton={false}
                 ></Task>
               ))}
             </div>
@@ -37,6 +36,7 @@ export default function Tasks({ tasks, onComplete, onDelete, completedTasks }) {
                   task={task}
                   onComplete={onComplete}
                   onDelete={onDelete}
+                  showDeleteButton={true}
                 ></Task>
               ))}
             </div>
@@ -44,16 +44,6 @@ export default function Tasks({ tasks, onComplete, onDelete, completedTasks }) {
         </header>
 
         {/* MOSTRAR AS TAREFAS */}
-        <div className={styles.list}>
-          {tasks.map((task) => (
-            <Task
-              key={task.id}
-              task={task}
-              onComplete={onComplete}
-              onDelete={onDelete}
-            ></Task>
-          ))}
-        </div>
       </section>
     </>
   );
