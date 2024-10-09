@@ -1,9 +1,8 @@
-import { PrismaClient } from "@prisma/client";
-
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-// MOSTRAR AS TAREFAS
-export const showAllTasks = async (req, res) => {
+// Função para mostrar todas as tarefas
+const showAllTasks = async (req, res) => {
   try {
     const tasks = await prisma.task.findMany(); // Busca todas as tarefas
     res.json(tasks); // Retorna as tarefas encontradas
@@ -12,28 +11,28 @@ export const showAllTasks = async (req, res) => {
   }
 };
 
-// CRIAR TAREFAS
-export const createTask = async (req, res) => {
+// Função para criar uma tarefa
+const createTask = async (req, res) => {
   const { title } = req.body;
   if (!title) {
-    return res.status(400).json({ error: "O campo título é necessário" });
+    return res.status(400).json({ error: "O campo titulo é necessário" });
   }
   try {
     const task = await prisma.task.create({
       data: {
-        title: title, // Define o título da tarefa
+        title: title,
         completed: false, // Define o campo completed como false por padrão
       },
     });
     res.status(201).json(task); // Retorna a tarefa criada
   } catch (error) {
     console.error("Erro ao criar tarefa:", error);
-    return res.status(500).json({ error: "Erro ao criar a tarefa" });
+    return res.json({ error });
   }
 };
 
-// ATUALIZAR TAREFA ? (nem vou usar acho)
-export const updateTask = async (req, res) => {
+// Função para atualizar uma tarefa
+const updateTask = async (req, res) => {
   const { id } = req.params;
   const { completed } = req.body;
 
@@ -44,12 +43,12 @@ export const updateTask = async (req, res) => {
     });
     return res.json(task);
   } catch (error) {
-    return res.status(500).json({ error: "Erro ao atualizar a tarefa" });
+    return res.json({ error });
   }
 };
 
-//DELETAR TAREFA
-export const deleteTask = async (req, res) => {
+// Função para deletar uma tarefa
+const deleteTask = async (req, res) => {
   const { id } = req.params;
   try {
     await prisma.task.delete({
@@ -57,6 +56,8 @@ export const deleteTask = async (req, res) => {
     });
     return res.json({ message: "Tarefa deletada" }); // Retorna uma resposta de sucesso
   } catch (error) {
-    return res.status(500).json({ error: "Erro ao deletar a tarefa" });
+    return res.json({ error });
   }
 };
+
+module.exports = { showAllTasks, createTask, updateTask, deleteTask }; // Exporte as funções

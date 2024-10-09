@@ -1,10 +1,10 @@
-import express from "express";
-import {
+const express = require("express");
+const {
   showAllTasks,
   createTask,
   updateTask,
   deleteTask,
-} from "./TodoController";
+} = require("./controller/TodoController"); // Tive problemas com ModuleJS, usei o CommonJs. Pesquisar porq
 
 const router = express.Router();
 
@@ -14,4 +14,4 @@ router.post("/tasks", createTask); // Criar uma tarefa
 router.put("/tasks/:id", updateTask); // Atualizar tarefa
 router.delete("/task/:id", deleteTask); // Deletar tarefa
 
-export { router };
+module.exports = { router }; // Exporte o router
