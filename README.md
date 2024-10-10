@@ -29,9 +29,25 @@ Descrição breve do projeto e suas funcionalidades.
 
 1. **Clone o repositório:**
 
-   ```bash
+   ```
    git clone https://github.com/seu-usuario/nome-do-repositorio.git
    cd nome-do-repositorio
-   Instale as dependências:
 
-```
+2. Instale as dependências:
+   ```
+   npm install
+
+3. Configuração do Prisma
+   ```
+   npx prisma migrate dev --name init
+   execute o seguinte comando para criar o banco de dados e as tabelas necessárias:
+
+4. Inicie o servidor
+   ```
+   node server.js
+
+5. Para rodar os testes
+   ```
+   npm test
+
+
