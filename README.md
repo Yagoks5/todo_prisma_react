@@ -32,3 +32,6 @@ Descrição breve do projeto e suas funcionalidades.
    ```bash
    git clone https://github.com/seu-usuario/nome-do-repositorio.git
    cd nome-do-repositorio
+   Instale as dependências:
+
+```
